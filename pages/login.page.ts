@@ -3,9 +3,6 @@ import { ENV } from '../config/env';
 // import {InventoryPage} from './InventoryPage';
 
 export class LoginPage {
-    static goto() {
-        throw new Error('Method not implemented.');
-    }
     readonly page: Page;
     readonly usernameInput: Locator;
     readonly passwordInput: Locator;
@@ -20,17 +17,19 @@ export class LoginPage {
 
     async goto() {
         await this.page.goto(ENV.BASE_URL ?? '');
+        return this;
     }
 
     async login(username: string, password: string) {
         await this.usernameInput.fill(username);
         await this.passwordInput.fill(password);
         await this.loginButton.click();
+        return this;
     }
-
 
     async getErrorMessage() {
         return this.page.locator('[data-test="error"]');
+        
     }
 
 }
